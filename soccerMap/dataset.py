@@ -7,6 +7,6 @@ class Dataset:
         self.path = path
 
     def getPics(self):
-        files = glob.glob(self.path, recursive=True)
-        for file in files:
-            yield file
+        files = glob.glob(self.path + "/**/*.bmp", recursive=True)
+        return list(files)
+        
