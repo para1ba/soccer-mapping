@@ -12,10 +12,18 @@ class Descriptor:
         self.dataset = Dataset(self.path)
 
     def describeAll(self):
+        return self.describeAll(self, 0)
+
+    def describeAll(self, sample_limit):
         descriptions = []
+        samples = 0
 
         for file in self.dataset.getPics():
-            image = cv2.imread(file)
+            if samples == sample_limit and sample_limit != 0:
+                break
+            print("Descrevendo imagem: ", file)
+            image = cv2.imread(file, 0)
+            samples = samples + 1
             for round in range(2):
                 gradients = self.describeImage(image)
                 descriptions.append(gradients)
@@ -24,7 +32,8 @@ class Descriptor:
         return descriptions
 
     def describeImage(self, image):
-        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        #gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        gray = image
         hog = cv2.HOGDescriptor(_winSize=(gray.shape[1] // self.cell_size[1] * self.cell_size[1],
                                     gray.shape[0] // self.cell_size[0] * self.cell_size[0]),
                                     _blockSize=(self.block_size[1] * self.cell_size[1],
@@ -47,4 +56,4 @@ class Descriptor:
                 off_x:n_cells[1] - self.block_size[1] + off_x + 1] += 1
         gradients /= cell_count
 
-        return gradients
+        return np.array(gradients).flatten()
