@@ -12,7 +12,9 @@ block_size = (1, 1)
 nbins = 9
 first = True
 positives = []
-for file in glob.glob("/home/para1ba/development/TCC/dataset/**/*.bmp", recursive=True):
+#for file in glob.glob("/home/para1ba/development/TCC/dataset/**/*.bmp", recursive=True):
+# TO 
+for file in glob.glob("./dataset/pos/cam_a/*.*", recursive=True):
     print("Analisando Imagem : " + file)
     image = cv2.imread(file)
     for i in range(2):
@@ -45,7 +47,7 @@ for file in glob.glob("/home/para1ba/development/TCC/dataset/**/*.bmp", recursiv
             first = False
         all_gradients += gradients
         image = cv2.flip(image, 1)
-all_gradients /= len(list(glob.glob("/home/para1ba/development/TCC/dataset/**/*.bmp", recursive=True)))
+all_gradients /= len(list(glob.glob("./dataset/pos/cam_a/*.*", recursive=True)))
 fig = plt.figure(num="Descrição HOG", figsize=(9, 13))
 columns = 3
 rows = 3
@@ -61,6 +63,7 @@ for i in range(9):
 plt.subplots_adjust(wspace = 0.2, hspace = 0.4)
 plt.suptitle("Descrição HOG")
 #cv2.imshow("antes", image)
-plt.show()  # finally, render the plot
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+plt.savefig('demo.png', bbox_inches='tight')
+#plt.show()  # finally, render the plot
+#cv2.waitKey(0)
+#cv2.destroyAllWindows()
