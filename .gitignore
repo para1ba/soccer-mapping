@@ -1,1 +1,12 @@
 venv/
+.vscode/
+dataset/
+figs/
+models/
+sample-extractor/
+annotations.txt
+dataset.zip
+training
+introduction.py
+soccerMap/__pycache__/
+soccerMap/.vscode/

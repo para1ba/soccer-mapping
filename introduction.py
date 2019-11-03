@@ -8,7 +8,7 @@ import glob
 #from pdb import set_trace as pause
 
 cell_size = (8, 8)
-block_size = (1, 1)
+block_size = (4, 4)
 nbins = 9
 first = True
 positives = []

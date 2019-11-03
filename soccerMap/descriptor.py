@@ -3,8 +3,8 @@ import numpy as np
 import cv2
 
 class Descriptor:
-    cell_size = (8, 8)
-    block_size = (1, 1)
+    cell_size = (4, 4)
+    block_size = (2, 2)
     nbins = 9
 
     def __init__(self, path):
@@ -21,7 +21,7 @@ class Descriptor:
         for file in self.dataset.getPics():
             if samples == sample_limit and sample_limit != 0:
                 break
-            print("Descrevendo imagem: ", file)
+            print("Sample number ", samples+1, ": ", file)
             image = cv2.imread(file, 0)
             samples = samples + 1
             for round in range(2):

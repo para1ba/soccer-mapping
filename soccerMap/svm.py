@@ -18,12 +18,24 @@ class SVM:
         print("Treinamento encerrado")
     
     def test(self, data):
+        data = data.astype('float32')
         return self.svm.predict(data.reshape((1, -1)))[1]
+
+    def testAll(self, allData):
+        resp = []
+        for data in allData:
+            resp.append(int(self.test(data)[0][0]))
+        return resp
+
+    def countAssertion(self, tests, target=1):
+        count = 0
+        for test in tests:
+            if(test == target):
+                count+=1
+        return (count*100)/len(tests)
 
     def save(self, filepath):
         self.svm.save(filepath)
 
     def load(self, filepath):
         self.svm = self.svm.load(filepath)
-        if(cv2.isTrained(self.svm)):
-            print("Modelo previamente treinado")
